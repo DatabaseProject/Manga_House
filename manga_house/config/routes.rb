@@ -1,9 +1,18 @@
 MangaHouse::Application.routes.draw do
+  get "manga/index"
+  get "manga/create"
+  get "manga/new"
+  get "manga/show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+
+  #feel free to change to the desired name
+  #root 'welcome#index'
+  resources :mangas
+  resources :authors
+  resources :artists
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
