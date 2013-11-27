@@ -1,8 +1,24 @@
 MangaHouse::Application.routes.draw do
-  get "manga/index"
-  get "manga/create"
-  get "manga/new"
-  get "manga/show"
+
+  #get "artist/index"
+  #get "artist/show"
+  #get "author/index"
+  #get "author/show"
+
+  get 'manga/' => 'manga#index'
+  get 'manga/:id' => 'manga#show'
+
+  get 'author/' => 'author#index'
+  get 'author/:id' => 'author#show'
+
+  get 'artist/' => 'artist#index'
+  get 'artist/:id' => 'artist#show'
+
+  #get "manga/index"
+  #get "manga/create"
+  #get "manga/new"
+  #get "manga/show"
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -10,9 +26,10 @@ MangaHouse::Application.routes.draw do
 
   #feel free to change to the desired name
   #root 'welcome#index'
-  resources :mangas
-  resources :authors
-  resources :artists
+  #resources :mangas
+  #resources :authors
+  #resources :artists
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
