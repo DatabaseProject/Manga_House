@@ -1,11 +1,12 @@
 MangaHouse::Application.routes.draw do
 
-  get "artist/index"
-  get "artist/show"
-  get "author/index"
-  get "author/show"
-  get "manga/index"
-  get "manga/show"
+  #get "artist/index"
+  #get "artist/show"
+  #get "author/index"
+  #get "author/show"
+  #get "manga/index"
+  #get "manga/show"
+	
   get 'manga/' => 'manga#index'
   get 'manga/:id' => 'manga#show'
 
