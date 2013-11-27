@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-MangaHouse::Application.config.secret_key_base = 'dcf32c2f4406993936dab718a1a1e14a028e658307f55c4ee24daf4627ce2850184530d4605bb2ee98462bcda806221fd0c2bde8f32f72dc186efd387967fa5d'
+MangaHouse::Application.config.secret_key_base = 'bf33b021d13e698c2e0908dbf2ea8a5e9f232819ec2808f77a7284670e425eb65a377d5003280b35b48f7e7e75ecc7157e3a9e45f5a0455904ca46d4d903a6c1'
