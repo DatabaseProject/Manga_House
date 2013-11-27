@@ -1,2 +1,17 @@
 <h1>Author#index</h1>
 <p>Find me in app/views/author/index.html.erb</p>
+
+
+
+<%= form_for :tmp, url: manga_path, html:  {:method => 'GET'} do |f| %>
+
+	<%= f.label :title %><br>
+	<%= f.text_field :title %>
+
+	<p>
+	<%= f.submit %>
+	</p>
+
+	1 | 2 | 3 | 4 | 5
+
+<% end %>
