@@ -1,11 +1,15 @@
 MangaHouse::Application.routes.draw do
 
+  get "release/index"
   #get "artist/index"
   #get "artist/show"
   #get "author/index"
   #get "author/show"
   #get "manga/index"
   #get "manga/show"
+	
+
+  root 'release#index'
 	
   get 'manga/' => 'manga#index'
   get 'manga/:id' => 'manga#show'
