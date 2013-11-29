@@ -32,7 +32,9 @@ class AuthorController < ApplicationController
 		  @author_info = {first_name: first_name, last_name: last_name, birthday: birthday}
 	  end
 
-	  sql_ = "select manga.name as Name, released_date as Date
+	  sql_ = "select manga.name as Name,
+			         released_date as Date,
+				     chapter.number as Number
 	  		  from manga,chapter 
 	  		  where chapter.manga_id = manga.manga_id and
 	 			    manga.author_id = "  + author_id
@@ -47,7 +49,8 @@ class AuthorController < ApplicationController
 		  tmp = result.symbolize_keys
 		  manga_name = tmp[:Name]
 		  date = tmp[:Date]
-		  @released_chapter << {manga_name: manga_name,date: date}
+		  chapter = tmp[:Number]
+		  @released_chapter << {manga_name: manga_name,date: date,chapter: chapter}
 	  end
 
 
