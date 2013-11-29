@@ -1,6 +1,7 @@
 MangaHouse::Application.routes.draw do
 
-  get "release/index"
+  #get "search/index"
+  #get "release/index"
   #get "artist/index"
   #get "artist/show"
   #get "author/index"
@@ -20,6 +21,7 @@ MangaHouse::Application.routes.draw do
   get 'artist/' => 'artist#index'
   get 'artist/:id' => 'artist#show'
 
+  get 'search' => 'search#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
