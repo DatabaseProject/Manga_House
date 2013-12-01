@@ -1,8 +1,16 @@
 class AuthorController < ApplicationController
   def index
+
+	  @page = params[:page] || 0
+	  @page = 0 if @page.to_i == -1
+	  num_item = 2
+
 	  sql = "select distinct concat(people.first_name,' ',people.last_name) as Author_name, author_id as AuthorID
 			  from author, people 
-			  where  author.people_id = people.people_id ; "
+			  where  author.people_id = people.people_id 
+	 		  order by people.first_name, people.last_name
+			  limit " + (@page.to_i*num_item).to_s + ', ' + ((@page.to_i+1)*num_item).to_s
+
 	  results = ActiveRecord::Base.connection.select_all(sql)	
 
 	  @data = []
@@ -33,6 +41,7 @@ class AuthorController < ApplicationController
 	  end
 
 	  sql_ = "select manga.name as Name,
+	  				 manga.manga_id as MangaID,
 			         released_date as Date,
 				     chapter.number as Number
 	  		  from manga,chapter 
@@ -48,9 +57,10 @@ class AuthorController < ApplicationController
 	  results.each do |result|
 		  tmp = result.symbolize_keys
 		  manga_name = tmp[:Name]
+		  manga_id = tmp[:MangaID]
 		  date = tmp[:Date]
 		  chapter = tmp[:Number]
-		  @released_chapter << {manga_name: manga_name,date: date,chapter: chapter}
+		  @released_chapter << {manga_name: manga_name,manga_id: manga_id,date: date,chapter: chapter}
 	  end
 
 

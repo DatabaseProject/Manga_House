@@ -1,255 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="shortcut icon" href="img/favicon.png">
+<% content_for :title do %>
+	Manga House: Search
+<% end %>
+<div class="container">
 
-		<title>Starter Template for Bootstrap</title>
+	<div class="my_header">
+		<h1>Search!</h1> 
+	</div>
 
-		<!-- Bootstrap core CSS -->
-		<link href="app/assets/stylesheets/bootstrap.css" rel="stylesheet">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#quick_search" data-toggle="tab">Quick Search</a></li>
+		<li><a href="#advanced_search" data-toggle="tab">Advance Search</a></li>
+	</ul>
 
-		<!-- Custom styles for this template -->
-		<link href="dist/css/starter-template.css" rel="stylesheet">
 
-		<!-- Just for debugging purposes. Don't actually copy this line! -->
-		<!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<!-- Tab panes -->
+	<div class="tab-content" >
+		<div class="tab-pane fade in active" id="quick_search">
+			<form class="panel-body" method = "get" action = "/search">
+				<input type="hidden" name="search_type" id="quick_search" value="quick_search" />
+				<span class="input-group col-md-6 col-md-offset-3">
+					<span class="input-group-addon">Title</span>
+					<input name = "word" type="text" class="form-control"placeholder="Quick Search!...">
+					<span class="input-group-btn">
+						<button class="btn btn-default btn" type="  button">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</span>
+			</form>
+		</div>
+		<div class="tab-pane fade" id="advanced_search">
+			<div class="panel-body">
+				<!-- Search Option-->
+				<form  action = "/search" class="form-horizontal col-md-offset-1" role="form">
+					<input type="hidden" name="search_type" id="advanced_searach" value="advanced_search" />
 
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-
-		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#"><img src="img/navbar-logo.png"></a>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li> <a href="/">New Release</a></li>
-						<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Infomations <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Manga</a></li>
-							<li><a href="#">Artist</a></li>
-							<li><a href="#">Author</a></li>
-						</ul>
-						</li>
-						<li><a href="#contact">About Us</a></li>
-						<li class="active"> <a href="#">Search</a></li>
-					</ul>
-					<!--
-					<div class="btn-group" style="padding-top:15px;">
-						<div class="input-group" >
-							<input type="text" class="form-control-sm"placeholder="Quick Search!...">
-							<span class="input-group-btn">
-								<button class="btn btn-default btn-xs" type="  button">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
+					<div class="form-group">
+						<label for="title_advanced_search" class="col-md-1 control-label">Title</label>
+						<div class="col-md-5">
+							<div class="input-group">
+								<input name = "title_advanced_search" type="text" class="form-control" id="title_advanced_search" placeholder="Title">
+								<span class="input-group-addon">
+									<input name = "title_advanced_search_checkbox"type="checkbox" id="title_advanced_search_checkbox" checked>
+								</span>
+							</div>
 						</div>
 					</div>
-					-->
-					<form class="navbar-form navbar-right"style="padding-top: 7px;" >
 
-						<div class="form-group">
-							<input placeholder="Email" class="form-control-sm"- type="text">
+					<div class="form-group">
+						<label for="artist_advanced_search" class="col-md-1 control-label">Artist</label>
+						<div class="col-md-5">
+							<div class="input-group">
+								<input name = "artist_advanced_search" type="text" class="form-control" id="artist_advanced_search" placeholder="artist">
+								<span class="input-group-addon">
+									<input name = "artist_advanced_search_checkbox" type="checkbox" id="artist_advanced_search_checkbox" >
+								</span>
+							</div>
 						</div>
-						<div class="form-group">
-							<input placeholder="Password" class="form-control-sm" type="password">
+					</div>
+
+					<div class="form-group">
+						<label for="author_advanced_search" class="col-md-1 control-label">Author</label>
+						<div class="col-md-5">
+							<div class="input-group">
+								<input name = "author_advanced_search" type="text" class="form-control" id="author_advanced_search" placeholder="author">
+								<span class="input-group-addon">
+									<input name = "author_advanced_search_checkbox" type="checkbox" id="author_advanced_search_checkbox" >
+								</span>
+							</div>
 						</div>
-						<button type="submit" class="btn btn-success btn-xs">Sign in</button>
+					</div>
+
+					<div class="form-group">
+						<label for="author_advanced_search" class="col-md-1 control-label"> Genre </label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<div class="checkbox-inline">
+									<label>
+										<input name ="action_" type="checkbox" id="action" > Action 
+									</label>
+								</div>
+								<div class="checkbox-inline" >
+									<label>
+										<input name ="comedy" type="checkbox"id="comedy"> Comedy
+									</label>
+								</div>
+								<div class="checkbox-inline">
+									<label>
+										<input name = "drama" type="checkbox" id="drama" > Drama
+									</label>
+								</div>
+								<div class="checkbox-inline">
+									<label>
+										<input name = "fantasy" type="checkbox" id="fantasy" > Fantasy
+									</label>
+								</div>
+								<div class="checkbox-inline">
+									<label>
+										<input name = "magic" type="checkbox" id="magic" > Magic
+									</label>
+								</div>
+								<div class="checkbox-inline">
+									<label> 
+										<input name = "mystery" type="checkbox" id="mystery" > Mystery
+									</label>
+								</div>
+								<div class="checkbox-inline">
+									<label>
+										<input name = "romance" type="checkbox" id="romance" > Romance
+									</label>
+								</div>
+								<span class="checkbox-inline">
+									<label>
+										<input name = "sports" type="checkbox" id="sports" > Sports
+									</label>
+								</span>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary col-md-1 col-md-offset-1">
+						<span class="glyphicon glyphicon-search"></span> Search!
+					</button>
+				</form>
 
 
-					</form>
-				</div><!--/.nav-collapse -->
 			</div>
 		</div>
+	</div>
 
-		<div class="container">
-
-			<div class="my_header">
-				<h1>Search!</h1> 
-			</div>
-
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#quick_search" data-toggle="tab">Quick Search</a></li>
-				<li><a href="#advanced_search" data-toggle="tab">Advance Search</a></li>
-			</ul>
-
-
-			<!-- Tab panes -->
-			<div class="tab-content" >
-				<div class="tab-pane fade in active" id="quick_search">
-					<form class="panel-body" method = "get" action = "/search">
-						<input type="hidden" name="search_type" id="quick_search" value="quick_search" />
-						<span class="input-group col-md-6 col-md-offset-3">
-							<span class="input-group-addon">Title</span>
-							<input name = "word" type="text" class="form-control"placeholder="Quick Search!...">
-							<span class="input-group-btn">
-								<button class="btn btn-default btn" type="  button">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
-						</span>
-					</form>
-				</div>
-				<div class="tab-pane fade" id="advanced_search">
-					<div class="panel-body">
-						<!-- Search Option-->
-						<form  action = "/search" class="form-horizontal col-md-offset-1" role="form">
-							<input type="hidden" name="search_type" id="advanced_searach" value="advanced_search" />
-
-							<div class="form-group">
-								<label for="title_advanced_search" class="col-md-1 control-label">Title</label>
-								<div class="col-md-5">
-									<div class="input-group">
-										<input name = "title_advanced_search" type="text" class="form-control" id="title_advanced_search" placeholder="Title">
-										<span class="input-group-addon">
-											<input name = "title_advanced_search_checkbox"type="checkbox" id="title_advanced_search_checkbox" checked>
-										</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="artist_advanced_search" class="col-md-1 control-label">Artist</label>
-								<div class="col-md-5">
-									<div class="input-group">
-										<input name = "artist_advanced_search" type="text" class="form-control" id="artist_advanced_search" placeholder="artist">
-										<span class="input-group-addon">
-											<input name = "artist_advanced_search_checkbox" type="checkbox" id="artist_advanced_search_checkbox" >
-										</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="author_advanced_search" class="col-md-1 control-label">Author</label>
-								<div class="col-md-5">
-									<div class="input-group">
-										<input name = "author_advanced_search" type="text" class="form-control" id="author_advanced_search" placeholder="author">
-										<span class="input-group-addon">
-											<input name = "author_advanced_search_checkbox" type="checkbox" id="author_advanced_search_checkbox" >
-										</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="author_advanced_search" class="col-md-1 control-label"> Genre </label>
-								<div class="col-md-8">
-									<div class="input-group">
-										<div class="checkbox-inline">
-											<label>
-												<input name ="action_" type="checkbox" id="action" > Action 
-											</label>
-										</div>
-										<div class="checkbox-inline" >
-											<label>
-												<input name ="comedy" type="checkbox"id="comedy"> Comedy
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label>
-												<input name = "drama" type="checkbox" id="drama" > Drama
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label>
-												<input name = "fantasy" type="checkbox" id="fantasy" > Fantasy
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label>
-												<input name = "magic" type="checkbox" id="magic" > Magic
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label> 
-												<input name = "mystery" type="checkbox" id="mystery" > Mystery
-											</label>
-										</div>
-										<div class="checkbox-inline">
-											<label>
-												<input name = "romance" type="checkbox" id="romance" > Romance
-											</label>
-										</div>
-										<span class="checkbox-inline">
-											<label>
-												<input name = "sports" type="checkbox" id="sports" > Sports
-											</label>
-										</span>
-									</div>
-								</div>
-							</div>
-							<button type="submit" class="btn btn-primary col-md-1 col-md-offset-1">
-								<span class="glyphicon glyphicon-search"></span> Search!
-							</button>
-						</form>
+	<!-- Table -->
+	<table class="table table-hover">
+		<hr>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Title</th>
+				<th>Chapter</th>
+				<th>Artist</th>
+				<th>Author</th>
+			</tr>
+		</thead>
+		<tbody>
 
 
-					</div>
-				</div>
-			</div>
-
-			<!-- Table -->
-			<table class="table table-hover">
-				<hr>
-				<thead>
+			<%if @data != nil  %>
+				<% @data.each do |datum| %>
 					<tr>
-						<th>Date</th>
-						<th>Title</th>
-						<th>Chapter</th>
-						<th>Artist</th>
-						<th>Author</th>
+						<td> <%= datum[:date] %> </td>
+						<td><a href="/manga/<%= datum[:manga_id] %>"> <%= datum[:title] %></a></td>
+						<td> <%= datum[:chapter] %> </td>
+						<td><a href="/artist/<%= datum[:artist_id] %>"> <%= datum[:artist] %> </a></td>
+						<td><a href="/author/<%= datum[:author_id] %>"> <%= datum[:author] %> </a></td>
 					</tr>
-				</thead>
-				<tbody>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
 
 
-					<%if @data != nil  %>
-						<% @data.each do |datum| %>
-							<tr>
-								<td> <%= datum[:date] %> </td>
-								<td><a href="#"> <%= datum[:title] %></a></td>
-								<td> <%= datum[:chapter] %> </td>
-								<td><a href="#"> <%= datum[:artist] %> </a></td>
-								<td><a href="#"> <%= datum[:author] %> </a></td>
-							</tr>
-						<% end %>
-					<% end %>
-				</tbody>
-			</table>
-
-
-			<ul class="pager">
-				<li class="previous disabled"><a href="#">&larr; Previous</a></li>
-				<li class="next"><a href="#">Next &rarr;</a></li>
-			</ul>  
-		</div><!-- /.container -->
-
-
-		<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="app/assets/javascripts/bootstrap.js"></script>
-	</body>
-</html>
+	<ul class="pager">
+		<li class="previous"><a href="<%= @url+'&page=' + (@page.to_i-1).to_s  %>">&larr; Previous</a></li>
+		<li class="next"><a href="<%= @url+'&page=' + (@page.to_i+1).to_s  %>">Next &rarr;</a></li>
+	</ul>  
+</div><!-- /.container -->

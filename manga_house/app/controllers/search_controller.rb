@@ -1,13 +1,29 @@
 class SearchController < ApplicationController
   def index
-	  search_keyword = params[:word]
+
+	  @page = params[:page] || 0
+	  @page = 0 if @page.to_i == -1
+	  num_item = 2
+
+	  @search_keyword = params[:word] || ''
+
+	  @search_type = params[:search_type]
+
+	  @url = request.fullpath.gsub(/(&)page=[0-9].*/,'')
+											#.gsub(/search_type=[a-z]*_search/,'')
+	  #render text: @url.inspect
+
+
 	  if params[:search_type] == 'quick_search'
-		  if search_keyword != '' 
+		  if @search_keyword != '' 
 			  sql = "select released_date as Date,
 						  manga.name as Title,
 						  chapter.number as Chapter,
 						  concat(people_artist.first_name,' ',people_artist.last_name) as Artist,
-						  concat(people_author.first_name,' ',people_author.last_name) as Author
+						  concat(people_author.first_name,' ',people_author.last_name) as Author,
+						  manga.manga_id as MangaID,
+						  author.author_id as AuthorID,
+						  artist.artist_id as ArtistID
 					  from manga,
 						  chapter,
 						  artist,
@@ -19,8 +35,9 @@ class SearchController < ApplicationController
 						  artist.people_id = people_artist.people_id and
 						  manga.author_id = author.author_id and 
 						  author.people_id = people_author.people_id and
-						  manga.name like '%" + search_keyword + "%'" + "
-					 order by released_date; "
+						  manga.name like '%" + @search_keyword + "%' " +
+						  "order by released_date desc
+						   limit "  + (@page.to_i*num_item).to_s + ', ' + num_item.to_s
 
 			  results = ActiveRecord::Base.connection.select_all(sql)
 
@@ -32,8 +49,12 @@ class SearchController < ApplicationController
 				artist = tmp[:Artist]
 				author = tmp[:Author]
 				chapter = tmp[:Chapter]
-				@data << {date: date,title: title,artist: artist,author: author,chapter: chapter}
+				manga_id = tmp[:MangaID]
+				artist_id = tmp[:ArtistID]
+				author_id = tmp[:AuthorID]
+				@data << {date: date,title: title,artist: artist,author: author,chapter: chapter,manga_id: manga_id,author_id: author_id,artist_id: artist_id}
 			  end
+
 		  end
 	  else
 		  titleCondition = ''
@@ -74,7 +95,10 @@ class SearchController < ApplicationController
 		  sql = "select distinct released_date as Date, manga.name as Title,
 					  chapter.number as Chapter,
 					  concat(people_artist.first_name,' ',people_artist.last_name) as Artist,
-					  concat(people_author.first_name,' ',people_author.last_name) as Author
+					  concat(people_author.first_name,' ',people_author.last_name) as Author,
+					  manga.manga_id as MangaID,
+					  author.author_id as AuthorID,
+					  artist.artist_id as ArtistID
 				 from manga,
 					  chapter,
 					  artist,
@@ -92,8 +116,8 @@ class SearchController < ApplicationController
 		  			  manga_has_genre.genre_id = genre.genre_id "+
 					  titleCondition + authorCondition + artistCondition + 
 					  'and ' + genreCondition +
-				 "order by released_date; "
-
+				 "order by released_date  desc
+				  limit " + (@page.to_i*num_item).to_s + ', ' + num_item.to_s
 
 		  results = ActiveRecord::Base.connection.select_all(sql)
 
@@ -105,11 +129,12 @@ class SearchController < ApplicationController
 			artist = tmp[:Artist]
 			author = tmp[:Author]
 			chapter = tmp[:Chapter]
-			@data << {date: date,title: title,artist: artist,author: author,chapter: chapter}
+			manga_id = tmp[:MangaID]
+			artist_id = tmp[:ArtistID]
+			author_id = tmp[:AuthorID]
+			@data << {date: date,title: title,artist: artist,author: author,chapter: chapter,manga_id: manga_id,author_id: author_id,artist_id: artist_id}
 
 		  end
-
-		  #render text: sql.inspect
 	  end
   end
 end
