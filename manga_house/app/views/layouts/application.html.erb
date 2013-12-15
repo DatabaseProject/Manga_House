@@ -3,8 +3,9 @@
 	<head>
 		<title> <%= yield :title %></title>
 		<%#<link rel="shortcut icon" href="img/favicon.png">%>
-		<%= stylesheet_link_tag "starter-template", "bootstrap" %>
+		<%= stylesheet_link_tag "starter-template", "bootstrap", "bootstrap-datetimepicker.min"%>
 		<%= stylesheet_link_tag '', href: "assets/favicon.png", rel: 'shortcut icon'%>
+		<%= javascript_include_tag "bootstrap-datetimepicker.min" %>
 
 		<%#why?%>
 		<%#<%= csrf_meta_tags %>%>
@@ -40,9 +41,9 @@
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Informations <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="/manga">Manga</a></li>
-							<li><a href="/artist">Artist</a></li>
-							<li><a href="/author">Author</a></li>
+							<li><a href="/mangas">Manga</a></li>
+							<li><a href="/artists">Artist</a></li>
+							<li><a href="/authors">Author</a></li>
 						</ul>
 						</li>
 						<li><a href="#contact">About Us</a></li>

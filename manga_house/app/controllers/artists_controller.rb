@@ -1,4 +1,4 @@
-class ArtistController < ApplicationController
+class ArtistsController < ApplicationController
   def index
 
 	  @page = params[:page] || 0
@@ -25,9 +25,7 @@ class ArtistController < ApplicationController
   def show
 	  artist_id = params[:id]
 	  sql = "select first_name,
-					last_name,
-					birthday
-			  from people,artist 
+					last_name, birthday from people,artist 
 			  where artist.people_id = people.people_id and
 			  		artist.artist_id = " + artist_id
 
@@ -67,4 +65,21 @@ class ArtistController < ApplicationController
 
 
   end
+
+  def create
+	  #render text: params[:artists].inspect
+	  @people = People.new
+	  @people.first_name = params[:input_first_name]
+	  @people.last_name = params[:input_last_name]
+	  @people.birthday = params[:birthday]
+	  @people.image_directory = params[:image_directory]
+	  @people.save
+	  @artist = Artist.new
+	  @artist.people_id = @people.people_id
+	  @artist.save
+	  
+	  redirect_to artists_path
+  end
+
+
 end

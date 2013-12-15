@@ -1,14 +1,15 @@
-<%= content_for :title do %>
-	Manga House: Author
+<% content_for :title do%>
+	Manga House: Artist
 <% end %>
+
 <div class="container">
 
 	<div class="my_header">
-		<h1>Author!</h1>
+		<h1>Artist!</h1>
 	</div>
 
 	<ul id="myTab" class="nav nav-tabs">
-		<li class="active"><a href="#all_tab_content" data-toggle="tab">All Author</a></li>
+		<li class="active"><a href="#all_tab_content" data-toggle="tab">All Artist</a></li>
 	</ul>
 
 	<div id="myTabContent col-md-12" class="tab-content">
@@ -17,14 +18,13 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Author</th>
+						<th>Artist</th>
 					</tr>
 				</thead>
 				<tbody>
-
-					<%@data.each do |datum| %>
+					<% @data.each do |datum| %>
 						<tr>
-							<td><a href="/author/<%= datum[:author_id] %>"><%= datum[:author_name] %></a></td>
+							<td><a href="/artists/<%= datum[:artist_id] %>"> <%= datum[:artist] %> </a></td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -36,8 +36,8 @@
 
 
 	<ul class="pager">
-		<li class="previous"><a href="/author?page=<%= @page.to_i-1 %>">&larr; Previous</a></li>
-		<li class="next"><a href="/author?page=<%= @page.to_i+1 %>">Next &rarr;</a></li>
+		<li class="previous"><a href="/artists?page=<%= @page.to_i-1 %>">&larr; Previous</a></li>
+		<li class="next"><a href="/artists?page=<%= @page.to_i+1 %>">Next &rarr;</a></li>
 	</ul>  
 
 </div><!-- /.container -->

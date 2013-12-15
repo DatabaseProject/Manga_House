@@ -25,7 +25,7 @@
 
 					<% @data.each do |datum| %>
 						<tr>
-							<td><a href="/manga/<%=datum[:manga_id] %>"> <%= datum[:title] %></a></td>
+							<td><a href="/mangas/<%=datum[:manga_id] %>"> <%= datum[:title] %></a></td>
 							<td><a href="/artist/<%=datum[:artist_id] %>"> <%= datum[:artist] %> </a></td>
 							<td><a href="/author/<%=datum[:author_id] %>"> <%= datum[:author] %> </a></td>
 						</tr>
@@ -38,8 +38,8 @@
 	</div>
 
 	<ul class="pager">
-		<li class="previous"><a href="manga?page=<%=@page.to_i-1%>">&larr; Previous</a></li>
-		<li class="next"><a href="manga?page=<%=@page.to_i+1%>">Next &rarr;</a></li>
+		<li class="previous"><a href="mangas?page=<%=@page.to_i-1%>">&larr; Previous</a></li>
+		<li class="next"><a href="mangas?page=<%=@page.to_i+1%>">Next &rarr;</a></li>
 	</ul>  
 
 </div><!-- /.container -->

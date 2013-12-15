@@ -1,4 +1,4 @@
-class AuthorController < ApplicationController
+class AuthorsController < ApplicationController
   def index
 
 	  @page = params[:page] || 0
@@ -62,7 +62,23 @@ class AuthorController < ApplicationController
 		  chapter = tmp[:Number]
 		  @released_chapter << {manga_name: manga_name,manga_id: manga_id,date: date,chapter: chapter}
 	  end
+  end
 
+  def new
+  end
 
+  def create
+	  #render text: params[:artists].inspect
+	  @people = People.new
+	  @people.first_name = params[:input_first_name]
+	  @people.last_name = params[:input_last_name]
+	  @people.birthday = params[:birthday]
+	  @people.image_directory = params[:image_directory]
+	  @people.save
+	  @author = Author.new
+	  @author.people_id = @people.people_id
+	  @author.save
+	  
+	  redirect_to authors_path
   end
 end
