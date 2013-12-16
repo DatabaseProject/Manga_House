@@ -3,7 +3,7 @@ class ArtistsController < ApplicationController
 
 	  @page = params[:page] || 0
 	  @page = 0 if @page.to_i == -1
-	  num_item = 2
+	  num_item = 10
 
 	  sql = "select distinct concat(people.first_name,' ',people.last_name) as Artist,
 	  			    artist.artist_id as ArtistID
@@ -78,7 +78,7 @@ class ArtistsController < ApplicationController
 	  @artist.people_id = @people.people_id
 	  @artist.save
 	  
-	  redirect_to artists_path
+	  redirect_to admins_path
   end
 
 

@@ -3,7 +3,7 @@ class AuthorsController < ApplicationController
 
 	  @page = params[:page] || 0
 	  @page = 0 if @page.to_i == -1
-	  num_item = 2
+	  num_item = 10
 
 	  sql = "select distinct concat(people.first_name,' ',people.last_name) as Author_name, author_id as AuthorID
 			  from author, people 
@@ -79,6 +79,6 @@ class AuthorsController < ApplicationController
 	  @author.people_id = @people.people_id
 	  @author.save
 	  
-	  redirect_to authors_path
+	  redirect_to admins_path
   end
 end

@@ -3,7 +3,7 @@ class MangasController < ApplicationController
 
 		@page = params[:page] || 0
 		@page = 0 if @page.to_i == -1
-		num_item = 2
+		num_item = 10
 
 		sql = "select distinct manga.name as Title,
 				  manga.manga_id as MangaID,
@@ -221,7 +221,7 @@ class MangasController < ApplicationController
 			mangaHasGenre.save
 		end
 
-		redirect_to  mangas_path
+		redirect_to  admins_path
 	end
 
 end
