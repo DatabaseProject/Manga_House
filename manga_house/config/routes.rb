@@ -15,6 +15,7 @@ MangaHouse::Application.routes.draw do
   resources :artists
   resources :mangas
   resources :admins
+  resources :chapters
 
   root 'release#index'
 	

@@ -45,6 +45,8 @@ class MangasController < ApplicationController
 	def show
 		manga_id_ = params[:id]
 
+		@image_directory = Manga.find(manga_id_).image_directory
+
 		sql = "select distinct manga.name as Title,
 					author.author_id as AuthorID,
 					artist.artist_id as ArtistID,
@@ -116,6 +118,7 @@ class MangasController < ApplicationController
 				  date = tmp[:Date]
 				  chapter = tmp[:Number]
 				  @released_chapter << {manga_name: manga_name,date: date,chapter: chapter}
+
 			  end
 	end
 
@@ -196,8 +199,17 @@ class MangasController < ApplicationController
 		artistName = params[:select_artist]
 		authorName = params[:select_author]
 		publisherName = params[:select_publisher]
-		@artist_people = People.find_by(first_name: artistName[0...artistName.index(' ')])
-		@author_people = People.find_by(first_name: authorName[0...authorName.index(' ')])
+		artist_index = artistName.index(' ')
+		author_index = authorName.index(' ')
+		if artist_index == nil
+			artist_index = artistName.length
+		end
+
+		if author_index == nil
+			author_index = authorName.length
+		end
+		@artist_people = People.find_by(first_name: artistName[0...artist_index])
+		@author_people = People.find_by(first_name: authorName[0...author_index])
 		@publisher = Publisher.find_by(name: publisherName)
 
 		@artist = Artist.find_by(people_id: @artist_people.id)

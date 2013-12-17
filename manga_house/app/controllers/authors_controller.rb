@@ -69,12 +69,15 @@ class AuthorsController < ApplicationController
 
   def create
 	  #render text: params[:artists].inspect
-	  @people = People.new
-	  @people.first_name = params[:input_first_name]
-	  @people.last_name = params[:input_last_name]
-	  @people.birthday = params[:birthday]
-	  @people.image_directory = params[:image_directory]
-	  @people.save
+	  @people = People.find_by(first_name: params[:input_first_name])
+	  if @people == nil
+		  @people = People.new
+		  @people.first_name = params[:input_first_name]
+		  @people.last_name = params[:input_last_name]
+		  @people.birthday = params[:birthday]
+		  @people.image_directory = params[:image_directory]
+		  @people.save
+	  end
 	  @author = Author.new
 	  @author.people_id = @people.people_id
 	  @author.save

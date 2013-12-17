@@ -26,8 +26,8 @@
 					<% @data.each do |datum| %>
 						<tr>
 							<td><a href="/mangas/<%=datum[:manga_id] %>"> <%= datum[:title] %></a></td>
-							<td><a href="/artist/<%=datum[:artist_id] %>"> <%= datum[:artist] %> </a></td>
-							<td><a href="/author/<%=datum[:author_id] %>"> <%= datum[:author] %> </a></td>
+							<td><a href="/artists/<%=datum[:artist_id] %>"> <%= datum[:artist] %> </a></td>
+							<td><a href="/authors/<%=datum[:author_id] %>"> <%= datum[:author] %> </a></td>
 						</tr>
 					<% end %>
 

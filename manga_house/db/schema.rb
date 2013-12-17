@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215033135) do
+ActiveRecord::Schema.define(version: 20131216191910) do
 
   create_table "artist", primary_key: "artist_id", force: true do |t|
     t.integer "people_id", null: false
@@ -36,6 +36,11 @@ ActiveRecord::Schema.define(version: 20131215033135) do
 
   add_index "chapter", ["manga_id"], name: "fk_Chapter_Manga1_idx", using: :btree
   add_index "chapter", ["manga_id"], name: "fk_chapter_1", using: :btree
+
+  create_table "chapters", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "favourite_artist", id: false, force: true do |t|
     t.integer "user_id",   null: false
@@ -69,9 +74,15 @@ ActiveRecord::Schema.define(version: 20131215033135) do
     t.string "description", limit: 45
   end
 
+  create_table "history", primary_key: "history_id", force: true do |t|
+    t.string "action",     limit: 45
+    t.string "table_name", limit: 45
+    t.string "name",       limit: 45
+  end
+
   create_table "manga", primary_key: "manga_id", force: true do |t|
     t.string  "name",            limit: 45
-    t.string  "description",     limit: 45
+    t.string  "description",     limit: 450
     t.string  "image_directory", limit: 100
     t.integer "author_id",                               null: false
     t.integer "artist_id",                               null: false
@@ -94,11 +105,6 @@ ActiveRecord::Schema.define(version: 20131215033135) do
   add_index "manga_has_genre", ["genre_id"], name: "fk_maga_has_genre_2", using: :btree
   add_index "manga_has_genre", ["manga_id"], name: "fk_maga_has_genre_1", using: :btree
 
-  create_table "manga_has_genres", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "people", primary_key: "people_id", force: true do |t|
     t.string "first_name",      limit: 45
     t.string "last_name",       limit: 45
@@ -108,7 +114,7 @@ ActiveRecord::Schema.define(version: 20131215033135) do
 
   create_table "publisher", primary_key: "publisher_id", force: true do |t|
     t.string "name",        limit: 45
-    t.string "description", limit: 45
+    t.string "description", limit: 450
   end
 
   create_table "user", primary_key: "user_id", force: true do |t|
